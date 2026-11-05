@@ -1,0 +1,6 @@
+node_modules
+.env
+.backup_pre_redesign
+coverage
+.DS_Store
+*.log

@@ -1,0 +1,146 @@
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+  <div>
+    <h1 class="text-2xl sm:text-3xl font-bold font-['Plus_Jakarta_Sans'] text-white">Hardware Catalog Inventory</h1>
+    <p class="text-xs text-[#94A3B8] mt-1">Manage catalog items, adjust regular prices, edit promotional discounts, and update stock counts.</p>
+  </div>
+  <a href="/admin/products/new" class="bg-[#38BDF8] hover:bg-[#0EA5E9] text-[#0F172A] text-xs font-bold px-4 py-2.5 rounded-lg flex items-center gap-2 transition-colors">
+    <span>+ Add New Product</span>
+  </a>
+</div>
+
+<!-- Stats Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+  <div class="bg-[#1E293B] border border-[#334155] rounded-xl p-4">
+    <div class="text-xs text-[#94A3B8]">Total Hardware Items</div>
+    <div class="text-2xl font-bold text-[#38BDF8] mt-1 font-mono"><%= products.length %></div>
+  </div>
+  <div class="bg-[#1E293B] border border-[#334155] rounded-xl p-4">
+    <div class="text-xs text-[#94A3B8]">Active Promotions</div>
+    <div class="text-2xl font-bold text-[#EA580C] mt-1 font-mono">
+      <%= products.filter(p => p.is_weekly_offer && p.sale_price).length %>
+    </div>
+  </div>
+  <div class="bg-[#1E293B] border border-[#334155] rounded-xl p-4">
+    <div class="text-xs text-[#94A3B8]">Low Stock Units</div>
+    <div class="text-2xl font-bold text-[#F59E0B] mt-1 font-mono">
+      <%= products.filter(p => p.stock_qty > 0 && p.stock_qty <= 3).length %>
+    </div>
+  </div>
+  <div class="bg-[#1E293B] border border-[#334155] rounded-xl p-4">
+    <div class="text-xs text-[#94A3B8]">Out of Stock</div>
+    <div class="text-2xl font-bold text-[#EF4444] mt-1 font-mono">
+      <%= products.filter(p => p.stock_qty === 0).length %>
+    </div>
+  </div>
+</div>
+
+<!-- Product Table -->
+<div class="bg-[#1E293B] border border-[#334155] rounded-xl overflow-hidden shadow-lg">
+  <div class="p-4 border-b border-[#334155] bg-[#1E293B] flex items-center justify-between">
+    <h2 class="font-bold text-sm text-white">Inventory Items</h2>
+    <span class="text-xs text-[#94A3B8] font-mono"><%= products.length %> items total</span>
+  </div>
+
+  <div class="overflow-x-auto">
+    <table class="w-full text-left text-xs">
+      <thead class="bg-[#0F172A] text-[#94A3B8] font-mono uppercase border-b border-[#334155]">
+        <tr>
+          <th class="py-3 px-4">Item & Model</th>
+          <th class="py-3 px-4">Category</th>
+          <th class="py-3 px-4">Active Price</th>
+          <th class="py-3 px-4">Stock</th>
+          <th class="py-3 px-4">Status</th>
+          <th class="py-3 px-4 text-right">Edit (Price / Offer / Stock)</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-[#334155]/60">
+        <% products.forEach(prod => { %>
+          <% 
+            const isOffer = prod.sale_price && prod.sale_price < prod.price;
+            const savings = isOffer ? prod.price - prod.sale_price : 0;
+            const pct = isOffer ? Math.round((savings / prod.price) * 100) : 0;
+          %>
+          <tr class="hover:bg-[#334155]/20">
+            <td class="py-3.5 px-4">
+              <div class="font-semibold text-white text-sm"><%= prod.name %></div>
+              <div class="text-[11px] font-mono text-[#94A3B8]"><%= prod.brand %> • <%= prod.model %></div>
+            </td>
+            <td class="py-3.5 px-4">
+              <span class="px-2 py-0.5 rounded text-[11px] font-medium bg-[#0F172A] text-[#38BDF8] border border-[#334155]">
+                <%= prod.category_name %>
+              </span>
+            </td>
+            <td class="py-3.5 px-4 font-mono">
+              <div class="font-bold text-white text-sm">
+                <%= formatPrice(prod.sale_price || prod.price) %>
+              </div>
+              <% if (isOffer) { %>
+                <div class="flex items-center gap-1.5 mt-0.5">
+                  <span class="text-[10px] font-bold text-[#EA580C]">-<%= pct %>% OFF</span>
+                  <span class="text-[10px] text-[#94A3B8] line-through"><%= formatPrice(prod.price) %></span>
+                </div>
+              <% } %>
+            </td>
+            <td class="py-3.5 px-4">
+              <% if (prod.stock_qty === 0) { %>
+                <span class="px-2 py-0.5 rounded text-[10px] bg-[#EF4444]/20 text-[#F87171] border border-[#EF4444]/30 font-medium">Out of stock</span>
+              <% } else if (prod.stock_qty <= 3) { %>
+                <span class="px-2 py-0.5 rounded text-[10px] bg-[#F59E0B]/20 text-[#FBBF24] border border-[#F59E0B]/30 font-medium"><%= prod.stock_qty %> left</span>
+              <% } else { %>
+                <span class="px-2 py-0.5 rounded text-[10px] bg-[#10B981]/20 text-[#34D399] border border-[#10B981]/30 font-medium"><%= prod.stock_qty %> units</span>
+              <% } %>
+            </td>
+            <td class="py-3.5 px-4">
+              <span class="text-[11px] text-[#94A3B8] font-mono uppercase">
+                <%= prod.status %>
+              </span>
+            </td>
+            <td class="py-3.5 px-4 text-right">
+              <form action="/admin/products/quick-update" method="POST" class="inline-flex items-center gap-2 justify-end">
+                <input type="hidden" name="id" value="<%= prod.id %>" />
+                
+                <div class="flex flex-col items-end">
+                  <span class="text-[9px] font-mono text-[#94A3B8]">Regular</span>
+                  <input 
+                    type="number" 
+                    name="price" 
+                    value="<%= prod.price %>" 
+                    class="bg-[#0F172A] border border-[#334155] rounded px-2 py-1 text-xs w-24 text-right text-white font-mono focus:border-[#38BDF8] outline-none"
+                    title="Regular Price"
+                  />
+                </div>
+
+                <div class="flex flex-col items-end">
+                  <span class="text-[9px] font-mono text-[#EA580C]">Offer</span>
+                  <input 
+                    type="number" 
+                    name="sale_price" 
+                    value="<%= prod.sale_price || '' %>" 
+                    placeholder="None"
+                    class="bg-[#0F172A] border border-[#EA580C]/40 rounded px-2 py-1 text-xs w-24 text-right text-white font-mono focus:border-[#EA580C] outline-none"
+                    title="Offer Price"
+                  />
+                </div>
+
+                <div class="flex flex-col items-end">
+                  <span class="text-[9px] font-mono text-[#94A3B8]">Stock</span>
+                  <input 
+                    type="number" 
+                    name="stock_qty" 
+                    value="<%= prod.stock_qty %>" 
+                    class="bg-[#0F172A] border border-[#334155] rounded px-2 py-1 text-xs w-16 text-center text-white font-mono focus:border-[#38BDF8] outline-none"
+                    title="Stock Quantity"
+                  />
+                </div>
+
+                <button type="submit" class="bg-[#334155] hover:bg-[#38BDF8] hover:text-[#0F172A] text-white py-1.5 px-3 rounded text-[11px] font-bold self-end mb-0.5 transition-colors">
+                  Save
+                </button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="py-12 border-b border-[var(--theme-border)] bg-[var(--theme-bg-subtle)]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto">
+    
+    <!-- Scoped Segmented Theme Switch (Rule 4: Cooling | Networking toggle at top) -->
+    <div class="inline-flex items-center p-1 rounded-full bg-[var(--theme-surface)] border border-[var(--theme-border)] shadow-sm mb-6">
+      <button 
+        type="button" 
+        id="toggle-cooling"
+        onclick="setOffersTheme('cooling')" 
+        class="py-1.5 px-5 rounded-full text-xs font-semibold transition-all"
+      >
+        Cooling Deals
+      </button>
+      <button 
+        type="button" 
+        id="toggle-networking"
+        onclick="setOffersTheme('networking')" 
+        class="py-1.5 px-5 rounded-full text-xs font-semibold transition-all"
+      >
+        Networking Deals
+      </button>
+    </div>
+
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--theme-text)] mb-3">
+      Weekly Super Offers
+    </h1>
+    <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed">
+      Time-limited promotional pricing directly backed by distributor warranty. Updated every Monday.
+    </p>
+  </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="offers-grid">
+    <% products.forEach(prod => { %>
+      <div class="offer-item-card" data-category="<%= prod.category_slug %>">
+        <%- include('../partials/product-card', { product: prod, currentTheme: prod.category_slug === 'air-conditioners' ? 'cooling' : 'networking' }) %>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+<script>
+  function setOffersTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    const coolingBtn = document.getElementById('toggle-cooling');
+    const netBtn = document.getElementById('toggle-networking');
+
+    if (theme === 'cooling') {
+      coolingBtn.className = 'py-1.5 px-5 rounded-full text-xs font-semibold bg-[#0284C7] text-white shadow-sm';
+      netBtn.className = 'py-1.5 px-5 rounded-full text-xs font-semibold text-[#536B88] hover:text-[#0F2038]';
+    } else {
+      netBtn.className = 'py-1.5 px-5 rounded-full text-xs font-semibold bg-[#10B981] text-[#042416] font-mono shadow-sm';
+      coolingBtn.className = 'py-1.5 px-5 rounded-full text-xs font-semibold text-[#8B949E] hover:text-[#F0F6FC]';
+    }
+
+    // Filter cards client-side
+    const targetSlug = theme === 'cooling' ? 'air-conditioners' : 'access-points';
+    document.querySelectorAll('.offer-item-card').forEach(card => {
+      if (card.getAttribute('data-category') === targetSlug) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Initial state based on preferred theme or default to cooling
+  const pref = localStorage.getItem('frostnet_preferred_theme') || 'cooling';
+  setOffersTheme(pref);
+</script>

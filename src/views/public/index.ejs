@@ -1,0 +1,162 @@
+<!-- Category Gateway (Full-Viewport Split Screen) -->
+<div class="min-h-screen flex flex-col bg-[#0B0F19] text-[#F8FAFC]">
+  
+  <!-- Minimal Neutral Top Bar -->
+  <header class="h-16 px-6 sm:px-10 border-b border-[#1E293B] flex items-center justify-between z-20 bg-[#0B0F19]/90 backdrop-blur-md">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-[#0284C7]/20 border border-[#0284C7]/40 flex items-center justify-center text-[#38BDF8]">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path d="M12 2v20M2 12h20"></path>
+        </svg>
+      </div>
+      <div>
+        <span class="font-bold text-base sm:text-lg tracking-tight text-white"><%= settings.business_name %></span>
+        <span class="hidden md:inline-block text-xs text-[#94A3B8] ml-2 font-mono">• Direct Importer Catalog</span>
+      </div>
+    </div>
+
+    <!-- Search in Top Bar -->
+    <div class="flex items-center gap-3 sm:gap-6">
+      <form action="/products" method="GET" class="relative hidden sm:block w-48 md:w-64">
+        <input 
+          type="text" 
+          name="q" 
+          placeholder="Search all equipment..." 
+          class="w-full bg-[#1E293B] border border-[#334155] rounded-lg px-3 py-1.5 pl-8 text-xs text-white placeholder-[#64748B] focus:outline-none focus:border-[#38BDF8]"
+        />
+        <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-[#64748B]">
+          <%- include('../partials/icons', { name: 'search', className: 'w-3.5 h-3.5' }) %>
+        </div>
+      </form>
+
+      <a 
+        href="<%= waLink('', '') %>" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="bg-[#25D366] hover:bg-[#20BA5A] text-white text-xs font-semibold px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition-colors"
+      >
+        <%- include('../partials/icons', { name: 'whatsapp', className: 'w-4 h-4' }) %>
+        <span>Direct WhatsApp</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Interactive 50/50 -> 60/40 Split Screen Gateway -->
+  <div class="flex-grow flex flex-col md:flex-row relative overflow-hidden" id="gateway-container">
+    
+    <% 
+      const acCat = categories.find(c => c.slug === 'air-conditioners') || { product_count: 6 };
+      const apCat = categories.find(c => c.slug === 'access-points') || { product_count: 6 };
+    %>
+
+    <!-- PANEL A: COOLING (Air Conditioners) -->
+    <a 
+      href="/category/air-conditioners"
+      id="panel-cooling"
+      class="gateway-panel group relative flex-1 flex flex-col justify-between p-8 sm:p-14 md:p-16 border-b md:border-b-0 md:border-r border-[#1E293B] bg-gradient-to-br from-[#0F2038] via-[#0B1526] to-[#080E1B] transition-all duration-500 ease-out cursor-pointer hover:flex-[1.4]"
+      onclick="localStorage.setItem('frostnet_preferred_theme', 'cooling')"
+    >
+      <!-- Background Graphic Element -->
+      <div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none flex items-center justify-end pr-10">
+        <svg class="w-80 h-80 text-[#38BDF8]" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"></path>
+        </svg>
+      </div>
+
+      <div class="relative z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0284C7]/20 border border-[#0284C7]/40 text-[#38BDF8] text-xs font-semibold tracking-wide uppercase mb-6">
+          <%- include('../partials/icons', { name: 'snowflake', className: 'w-3.5 h-3.5' }) %>
+          Climate Solutions
+        </div>
+        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4 font-['Plus_Jakarta_Sans']">
+          Cooling
+        </h2>
+        <p class="text-[#94A3B8] text-base sm:text-lg max-w-md leading-relaxed group-hover:text-white transition-colors">
+          High-efficiency Inverter split systems, commercial cassettes, and room climate control with verified warranty.
+        </p>
+      </div>
+
+      <div class="relative z-10 pt-12 flex items-center justify-between border-t border-[#1E293B]/80">
+        <div>
+          <span class="block text-2xl sm:text-3xl font-bold text-white font-mono"><%= acCat.product_count || 6 %></span>
+          <span class="text-xs text-[#64748B] uppercase tracking-wider">Models in stock</span>
+        </div>
+        <div class="w-12 h-12 rounded-full bg-[#0284C7] text-white flex items-center justify-center group-hover:translate-x-2 transition-transform shadow-lg shadow-[#0284C7]/30">
+          <%- include('../partials/icons', { name: 'arrow-right', className: 'w-5 h-5' }) %>
+        </div>
+      </div>
+    </a>
+
+    <!-- PANEL B: NETWORKING (Access Points & Switches) -->
+    <a 
+      href="/category/access-points"
+      id="panel-networking"
+      class="gateway-panel group relative flex-1 flex flex-col justify-between p-8 sm:p-14 md:p-16 bg-gradient-to-br from-[#12161A] via-[#0E1216] to-[#080B0E] transition-all duration-500 ease-out cursor-pointer hover:flex-[1.4]"
+      onclick="localStorage.setItem('frostnet_preferred_theme', 'networking')"
+    >
+      <!-- Background Technical Grid Element -->
+      <div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none flex items-center justify-end pr-10">
+        <svg class="w-80 h-80 text-[#10B981]" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+          <rect x="2" y="2" width="20" height="8" rx="2"></rect>
+          <rect x="2" y="14" width="20" height="8" rx="2"></rect>
+          <line x1="6" y1="6" x2="6.01" y2="6"></line>
+          <line x1="6" y1="18" x2="6.01" y2="18"></line>
+        </svg>
+      </div>
+
+      <div class="relative z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#10B981]/20 border border-[#10B981]/40 text-[#34D399] text-xs font-semibold tracking-wide uppercase mb-6">
+          <%- include('../partials/icons', { name: 'wifi', className: 'w-3.5 h-3.5' }) %>
+          Enterprise Connectivity
+        </div>
+        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-4 font-['IBM_Plex_Sans']">
+          Networking
+        </h2>
+        <p class="text-[#8B949E] text-base sm:text-lg max-w-md leading-relaxed group-hover:text-white transition-colors">
+          Carrier-grade Wi-Fi 6/6E access points, gigabit PoE infrastructure, and long-range outdoor wireless hardware.
+        </p>
+      </div>
+
+      <div class="relative z-10 pt-12 flex items-center justify-between border-t border-[#30363D]/80">
+        <div>
+          <span class="block text-2xl sm:text-3xl font-bold text-white font-mono"><%= apCat.product_count || 6 %></span>
+          <span class="text-xs text-[#8B949E] uppercase tracking-wider">Models in stock</span>
+        </div>
+        <div class="w-12 h-12 rounded-full bg-[#10B981] text-[#042416] flex items-center justify-center group-hover:translate-x-2 transition-transform shadow-lg shadow-[#10B981]/30">
+          <%- include('../partials/icons', { name: 'arrow-right', className: 'w-5 h-5' }) %>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Gateway Bottom Value Strip -->
+  <div class="h-12 bg-[#080B11] border-t border-[#1E293B] px-6 text-xs text-[#64748B] flex items-center justify-between font-mono">
+    <span>Direct Importer • Genuine Manufacturer Warranty</span>
+    <span class="hidden sm:inline">Islandwide Shipping Across Sri Lanka</span>
+    <a href="/products" class="text-[#38BDF8] hover:underline">View Combined Catalog →</a>
+  </div>
+</div>
+
+<script>
+  // Panel hover interaction: expand hovered panel, slightly dim sibling
+  const coolingPanel = document.getElementById('panel-cooling');
+  const networkingPanel = document.getElementById('panel-networking');
+
+  if (coolingPanel && networkingPanel && window.innerWidth >= 768) {
+    coolingPanel.addEventListener('mouseenter', () => {
+      networkingPanel.style.opacity = '0.55';
+    });
+    coolingPanel.addEventListener('mouseleave', () => {
+      networkingPanel.style.opacity = '1';
+    });
+
+    networkingPanel.addEventListener('mouseenter', () => {
+      coolingPanel.style.opacity = '0.55';
+    });
+    networkingPanel.addEventListener('mouseleave', () => {
+      coolingPanel.style.opacity = '1';
+    });
+  }
+</script>

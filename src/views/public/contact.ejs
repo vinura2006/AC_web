@@ -1,0 +1,83 @@
+<div class="py-12 border-b border-[var(--theme-border)] bg-[var(--theme-bg-subtle)]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl text-center">
+    <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--theme-text)] mb-3">Direct Contact & Showroom</h1>
+    <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed">
+      Inquire about availability, request B2B invoices, or visit our Colombo office.
+    </p>
+  </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 max-w-5xl">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="space-y-6">
+      <div class="th-card p-6 border-[#25D366]/40 bg-[#25D366]/5">
+        <div class="flex items-center gap-3 mb-2">
+          <div class="w-10 h-10 rounded-lg bg-[#25D366]/20 flex items-center justify-center text-[#25D366]">
+            <%- include('../partials/icons', { name: 'whatsapp', className: 'w-5 h-5' }) %>
+          </div>
+          <div>
+            <h3 class="font-bold text-sm text-[var(--theme-text)]">WhatsApp Fast Channel</h3>
+            <p class="text-xs text-[var(--theme-text-muted)]">Immediate responses for quotes and stock verification</p>
+          </div>
+        </div>
+        <a 
+          href="<%= waLink('', '') %>" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn-whatsapp w-full py-3 text-xs font-bold flex items-center justify-center gap-2 rounded-xl mt-4"
+        >
+          <span>Chat on WhatsApp (<%= settings.whatsapp_number %>)</span>
+        </a>
+      </div>
+
+      <div class="th-card p-6 space-y-4 text-xs">
+        <div>
+          <span class="font-mono text-[10px] text-[var(--theme-primary)] uppercase tracking-wider block mb-1">Telephone</span>
+          <a href="tel:<%= settings.phone %>" class="text-sm font-bold text-[var(--theme-text)] hover:underline"><%= settings.phone %></a>
+        </div>
+        <div>
+          <span class="font-mono text-[10px] text-[var(--theme-primary)] uppercase tracking-wider block mb-1">Email</span>
+          <a href="mailto:<%= settings.email %>" class="text-sm font-bold text-[var(--theme-text)] hover:underline"><%= settings.email %></a>
+        </div>
+        <div>
+          <span class="font-mono text-[10px] text-[var(--theme-primary)] uppercase tracking-wider block mb-1">Showroom & Warehouse</span>
+          <p class="text-sm text-[var(--theme-text)] leading-relaxed"><%= settings.address %></p>
+        </div>
+        <div>
+          <span class="font-mono text-[10px] text-[var(--theme-primary)] uppercase tracking-wider block mb-1">Operating Hours</span>
+          <p class="text-sm text-[var(--theme-text)]"><%= settings.hours %></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Commercial Orders -->
+    <div class="th-card p-8 flex flex-col justify-between">
+      <div>
+        <h2 class="text-xl font-bold text-[var(--theme-text)] mb-3">Commercial Orders & Project Bidding</h2>
+        <p class="text-xs text-[var(--theme-text-muted)] leading-relaxed mb-6">
+          Equipping a commercial building, hotel resort, or enterprise campus network? We provide tax invoice options, distributor discounts, and batch delivery schedules for:
+        </p>
+        <ul class="space-y-3 text-xs text-[var(--theme-text-muted)] mb-8">
+          <li class="flex items-center gap-2">
+            <span class="text-[#25D366] font-bold">✓</span> Multi-zone Inverter split & cassette systems
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[#25D366] font-bold">✓</span> Wi-Fi 6/6E/7 access point campus rollouts
+          </li>
+          <li class="flex items-center gap-2">
+            <span class="text-[#25D366] font-bold">✓</span> PoE switch infrastructure & network accessories
+          </li>
+        </ul>
+      </div>
+
+      <a 
+        href="<%= waLink('Commercial Bulk Inquiry', '') %>" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="th-btn-primary w-full py-3 text-xs font-bold text-center block"
+      >
+        Request Commercial Quotation
+      </a>
+    </div>
+  </div>
+</div>

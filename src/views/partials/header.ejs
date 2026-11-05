@@ -1,0 +1,135 @@
+<header class="sticky top-0 z-40 bg-[var(--theme-surface)]/95 backdrop-blur-md border-b border-[var(--theme-border)] transition-colors">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 gap-4">
+    <!-- Brand / Logo -->
+    <a href="/" class="flex items-center gap-2.5 flex-shrink-0">
+      <div class="w-8 h-8 rounded-lg bg-[var(--theme-primary)]/10 border border-[var(--theme-primary)]/30 flex items-center justify-center text-[var(--theme-primary)]">
+        <% if (typeof currentTheme !== 'undefined' && currentTheme === 'cooling') { %>
+          <%- include('./icons', { name: 'snowflake', className: 'w-4 h-4' }) %>
+        <% } else if (typeof currentTheme !== 'undefined' && currentTheme === 'networking') { %>
+          <%- include('./icons', { name: 'wifi', className: 'w-4 h-4' }) %>
+        <% } else { %>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 2v20M2 12h20"></path>
+          </svg>
+        <% } %>
+      </div>
+      <div>
+        <span class="font-bold text-base sm:text-lg tracking-tight text-[var(--theme-text)]">
+          <%= settings.business_name %>
+        </span>
+        <% if (typeof currentTheme !== 'undefined' && currentTheme === 'cooling') { %>
+          <span class="hidden sm:inline-block text-[11px] font-semibold text-[var(--theme-primary)] ml-1.5 uppercase tracking-wider">
+            Air Conditioning
+          </span>
+        <% } else if (typeof currentTheme !== 'undefined' && currentTheme === 'networking') { %>
+          <span class="hidden sm:inline-block text-[11px] font-mono text-[var(--theme-primary)] ml-1.5 uppercase tracking-wider">
+            Network Systems
+          </span>
+        <% } %>
+      </div>
+    </a>
+
+    <!-- Theme Switch Link (Rule 4: Subtle switch link in header) -->
+    <div class="hidden md:flex items-center text-xs">
+      <% if (typeof currentTheme !== 'undefined' && currentTheme === 'cooling') { %>
+        <a 
+          href="/category/access-points" 
+          class="px-2.5 py-1 rounded-md text-[var(--theme-text-muted)] hover:text-[var(--theme-text)] hover:bg-[var(--theme-bg-subtle)] transition-colors flex items-center gap-1.5"
+          onclick="localStorage.setItem('frostnet_preferred_theme', 'networking')"
+        >
+          <span>Switch to <strong>Networking</strong></span>
+          <span class="text-[var(--theme-primary)]">→</span>
+        </a>
+      <% } else if (typeof currentTheme !== 'undefined' && currentTheme === 'networking') { %>
+        <a 
+          href="/category/air-conditioners" 
+          class="px-2.5 py-1 rounded-md text-[var(--theme-text-muted)] hover:text-[var(--theme-text)] hover:bg-[var(--theme-bg-subtle)] transition-colors flex items-center gap-1.5"
+          onclick="localStorage.setItem('frostnet_preferred_theme', 'cooling')"
+        >
+          <span>Switch to <strong>Cooling</strong></span>
+          <span class="text-[var(--theme-primary)]">→</span>
+        </a>
+      <% } %>
+    </div>
+
+    <!-- Navigation links -->
+    <nav class="hidden lg:flex items-center gap-6 text-sm font-medium">
+      <a href="/" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-text)] transition-colors">Gateway</a>
+      <a href="/products" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-text)] transition-colors">All Products</a>
+      <a href="/offers" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-text)] transition-colors flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-[var(--theme-accent)]"></span>
+        Weekly Offers
+      </a>
+      <a href="/about" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-text)] transition-colors">About</a>
+      <a href="/contact" class="text-[var(--theme-text-muted)] hover:text-[var(--theme-text)] transition-colors">Contact</a>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="flex items-center gap-3">
+      <a 
+        href="<%= waLink('', '') %>" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="hidden sm:inline-flex btn-whatsapp text-xs font-semibold px-3 py-1.5 gap-1.5 rounded-lg"
+      >
+        <%- include('./icons', { name: 'whatsapp', className: 'w-4 h-4' }) %>
+        <span>Instant Quote</span>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button 
+        type="button" 
+        id="mobile-menu-btn" 
+        class="lg:hidden p-2 rounded-lg text-[var(--theme-text-muted)] hover:text-[var(--theme-text)] focus:outline-none"
+        aria-label="Toggle navigation menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-drawer" class="fixed inset-0 z-50 bg-[var(--theme-bg)]/98 backdrop-blur-xl transform translate-x-full transition-transform duration-300 lg:hidden flex flex-col p-6 overflow-y-auto">
+    <div class="flex items-center justify-between pb-4 border-b border-[var(--theme-border)]">
+      <span class="font-bold text-lg text-[var(--theme-text)]"><%= settings.business_name %></span>
+      <button id="mobile-drawer-close" class="p-2 text-[var(--theme-text-muted)] hover:text-[var(--theme-text)]" aria-label="Close menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Category Direct Links -->
+    <div class="my-6 grid grid-cols-2 gap-3">
+      <a href="/category/air-conditioners" class="th-card p-3 text-center" onclick="localStorage.setItem('frostnet_preferred_theme', 'cooling')">
+        <span class="block text-xs font-bold text-[var(--theme-text)]">Cooling (AC)</span>
+      </a>
+      <a href="/category/access-points" class="th-card p-3 text-center" onclick="localStorage.setItem('frostnet_preferred_theme', 'networking')">
+        <span class="block text-xs font-bold text-[var(--theme-text)]">Networking (AP)</span>
+      </a>
+    </div>
+
+    <!-- Nav links -->
+    <nav class="flex flex-col gap-4 text-base font-medium">
+      <a href="/" class="py-2 border-b border-[var(--theme-border)] text-[var(--theme-text)]">Gateway</a>
+      <a href="/products" class="py-2 border-b border-[var(--theme-border)] text-[var(--theme-text)]">All Products</a>
+      <a href="/offers" class="py-2 border-b border-[var(--theme-border)] text-[var(--theme-text)]">Weekly Offers</a>
+      <a href="/about" class="py-2 border-b border-[var(--theme-border)] text-[var(--theme-text)]">About</a>
+      <a href="/contact" class="py-2 border-b border-[var(--theme-border)] text-[var(--theme-text)]">Contact</a>
+    </nav>
+
+    <div class="mt-auto pt-6">
+      <a 
+        href="<%= waLink('', '') %>" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="btn-whatsapp w-full py-3 gap-2 text-sm font-semibold flex items-center justify-center rounded-lg"
+      >
+        <%- include('./icons', { name: 'whatsapp', className: 'w-5 h-5' }) %>
+        <span>Chat on WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</header>

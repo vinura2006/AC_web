@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+@import './fonts.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ========================================================
+     DEFAULT / NEUTRAL THEME (Category Gateway & Search)
+     ======================================================== */
+  :root,
+  [data-theme="neutral"] {
+    --theme-bg: #0F172A;
+    --theme-bg-subtle: #1E293B;
+    --theme-surface: #1E293B;
+    --theme-surface-hover: #334155;
+    --theme-border: #334155;
+    --theme-text: #F8FAFC;
+    --theme-text-muted: #94A3B8;
+    --theme-primary: #38BDF8;
+    --theme-primary-hover: #0EA5E9;
+    --theme-primary-fg: #0F172A;
+    --theme-accent: #F59E0B;
+    --theme-font-heading: 'Plus Jakarta Sans', sans-serif;
+    --theme-font-body: 'DM Sans', sans-serif;
+    --theme-font-mono: 'IBM Plex Mono', monospace;
+    --theme-radius-card: 16px;
+    --theme-radius-btn: 10px;
+    --theme-shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.25);
+  }
+
+  /* ========================================================
+     THEME A - COOLING (Light, Friendly, HVAC Editorial)
+     ======================================================== */
+  [data-theme="cooling"] {
+    --theme-bg: #F8FAFC;
+    --theme-bg-subtle: #EDF4FA;
+    --theme-surface: #FFFFFF;
+    --theme-surface-hover: #F0F7FF;
+    --theme-border: #DCE7F2;
+    --theme-text: #0F2038;
+    --theme-text-muted: #536B88;
+    --theme-primary: #0284C7;        /* Crisp Ocean Blue */
+    --theme-primary-hover: #0369A1;
+    --theme-primary-fg: #FFFFFF;
+    --theme-accent: #EA580C;         /* Warm Coral for high-contrast CTAs */
+    --theme-font-heading: 'Plus Jakarta Sans', sans-serif;
+    --theme-font-body: 'DM Sans', sans-serif;
+    --theme-font-mono: 'DM Sans', sans-serif; /* No mono in Cooling */
+    --theme-radius-card: 20px;
+    --theme-radius-btn: 12px;
+    --theme-shadow-card: 0 10px 30px -5px rgba(15, 32, 56, 0.06), 0 2px 6px -1px rgba(15, 32, 56, 0.03);
+  }
+
+  /* ========================================================
+     THEME B - NETWORKING (Dark, Dense, Enterprise Datasheet)
+     ======================================================== */
+  [data-theme="networking"] {
+    --theme-bg: #0D1117;             /* Clean Graphite/Charcoal */
+    --theme-bg-subtle: #161B22;
+    --theme-surface: #161B22;
+    --theme-surface-hover: #21262D;
+    --theme-border: #30363D;
+    --theme-text: #F0F6FC;
+    --theme-text-muted: #8B949E;
+    --theme-primary: #10B981;        /* Enterprise Signal Emerald */
+    --theme-primary-hover: #059669;
+    --theme-primary-fg: #042416;
+    --theme-accent: #F59E0B;         /* Signal Amber */
+    --theme-font-heading: 'IBM Plex Sans', sans-serif;
+    --theme-font-body: 'IBM Plex Sans', sans-serif;
+    --theme-font-mono: 'IBM Plex Mono', monospace;
+    --theme-radius-card: 4px;        /* Sharp enterprise corners */
+    --theme-radius-btn: 4px;
+    --theme-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5);
+  }
+
+  body {
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
+    font-family: var(--theme-font-body);
+    min-height: 100vh;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--theme-font-heading);
+    color: var(--theme-text);
+    letter-spacing: -0.015em;
+  }
+}
+
+@layer components {
+  /* Dynamic Theme Card */
+  .th-card {
+    background-color: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+    border-radius: var(--theme-radius-card);
+    box-shadow: var(--theme-shadow-card);
+    transition: all 0.2s ease;
+  }
+
+  /* Dynamic Theme Buttons */
+  .th-btn-primary {
+    background-color: var(--theme-primary);
+    color: var(--theme-primary-fg);
+    border-radius: var(--theme-radius-btn);
+    font-weight: 600;
+    transition: all 0.15s ease;
+  }
+  .th-btn-primary:hover {
+    background-color: var(--theme-primary-hover);
+  }
+
+  .th-btn-accent {
+    background-color: var(--theme-accent);
+    color: #FFFFFF;
+    border-radius: var(--theme-radius-btn);
+    font-weight: 600;
+    transition: all 0.15s ease;
+  }
+  .th-btn-accent:hover {
+    filter: brightness(1.1);
+  }
+
+  .th-btn-secondary {
+    background-color: var(--theme-bg-subtle);
+    color: var(--theme-text);
+    border: 1px solid var(--theme-border);
+    border-radius: var(--theme-radius-btn);
+    transition: all 0.15s ease;
+  }
+  .th-btn-secondary:hover {
+    background-color: var(--theme-surface-hover);
+  }
+
+  /* WhatsApp CTA button (Standardized Brand Color) */
+  .btn-whatsapp {
+    background-color: #25D366;
+    color: #FFFFFF;
+    font-weight: 600;
+    border-radius: var(--theme-radius-btn);
+    transition: all 0.15s ease;
+  }
+  .btn-whatsapp:hover {
+    background-color: #20BA5A;
+  }
+}

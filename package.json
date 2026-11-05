@@ -1,0 +1,61 @@
+{
+  "name": "frostnet-catalog",
+  "version": "1.0.0",
+  "description": "Fast, modern, cyber-styled catalog website for Air Conditioners and Access Points",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node scripts/dev.js",
+    "build:css": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --minify",
+    "watch:css": "tailwindcss -i ./public/css/input.css -o ./public/css/output.css --watch",
+    "copy:fonts": "node scripts/copy-fonts.js",
+    "build": "npm run copy:fonts && npm run build:css",
+    "lint": "eslint .",
+    "test": "node --test tests/**/*.test.js",
+    "migrate": "node src/db/migrate.js",
+    "seed:categories": "node src/db/seed-categories.js",
+    "seed:demo": "node src/db/seed-demo.js",
+    "create-admin": "node scripts/create-admin.js"
+  },
+  "keywords": [
+    "catalog",
+    "cyber",
+    "express",
+    "ejs",
+    "tailwind"
+  ],
+  "author": "FrostNet Technologies",
+  "license": "ISC",
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
+    "bcryptjs": "^3.0.3",
+    "compression": "^1.8.2",
+    "connect-pg-simple": "^10.0.0",
+    "csrf-csrf": "^4.0.3",
+    "dotenv": "^18.0.9",
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^8.7.1",
+    "express-session": "^1.19.0",
+    "helmet": "^8.3.0",
+    "marked": "^18.1.2",
+    "morgan": "^1.12.1",
+    "multer": "^2.5.0",
+    "pg": "^8.23.1",
+    "sanitize-html": "^2.18.1",
+    "sharp": "^0.35.5",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "eslint": "^10.13.0",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.3.1",
+    "tailwindcss": "^3.4.0"
+  }
+}

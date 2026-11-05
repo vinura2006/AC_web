@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= typeof currentTheme !== 'undefined' ? currentTheme : 'neutral' %>">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? `${title} | ${settings.business_name}` : `${settings.business_name} | ${settings.tagline}` %></title>
+  <meta name="description" content="<%= typeof description !== 'undefined' ? description : settings.tagline %>">
+  
+  <!-- Compiled Styles -->
+  <link rel="stylesheet" href="/css/output.css">
+  <meta name="theme-color" content="#0F172A">
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+  
+  <!-- Global Header (Hidden only if specifically requested by split gateway) -->
+  <% if (typeof hideHeader === 'undefined' || !hideHeader) { %>
+    <%- include('../partials/header') %>
+  <% } %>
+
+  <!-- Main Body Content -->
+  <main class="flex-grow relative">
+    <%- body %>
+  </main>
+
+  <!-- Global Footer -->
+  <% if (typeof hideFooter === 'undefined' || !hideFooter) { %>
+    <%- include('../partials/footer') %>
+  <% } %>
+
+  <!-- Floating WhatsApp CTA (Shown except on product detail mobile view) -->
+  <% if (typeof hideFloatingWa === 'undefined' || !hideFloatingWa) { %>
+    <a 
+      href="<%= waLink('', '') %>" 
+      target="_blank" 
+      rel="noopener noreferrer"
+      aria-label="Direct WhatsApp Quote" 
+      class="fixed bottom-6 right-6 z-40 w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-transform"
+    >
+      <%- include('../partials/icons', { name: 'whatsapp', className: 'w-7 h-7' }) %>
+    </a>
+  <% } %>
+
+  <script src="/js/ui.js"></script>
+</body>
+</html>

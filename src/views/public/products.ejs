@@ -1,0 +1,533 @@
+<%# Full Catalog & Category Listing with scoped Theme Views %>
+<% const isCooling = typeof currentTheme !== 'undefined' && currentTheme === 'cooling'; %>
+<% const isNetworking = typeof currentTheme !== 'undefined' && currentTheme === 'networking'; %>
+
+<% if (isCooling) { %>
+  <!-- ==============================================================
+       THEME A: COOLING (Light, Friendly, Editorial HVAC Presentation)
+       ============================================================== -->
+  
+  <!-- Editorial Hero & Value Proposition -->
+  <section class="bg-gradient-to-b from-[#EDF4FA] to-[#F8FAFC] py-12 md:py-16 border-b border-[#DCE7F2]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#DCE7F2] text-[#0284C7] text-xs font-semibold uppercase tracking-wider mb-4 shadow-sm">
+          <%- include('../partials/icons', { name: 'snowflake', className: 'w-3.5 h-3.5' }) %>
+          Certified Inverter & Split Climate Equipment
+        </div>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold font-['Plus_Jakarta_Sans'] text-[#0F2038] tracking-tight mb-4">
+          Energy-Efficient Air Conditioning for Home & Office
+        </h1>
+        <p class="text-[#536B88] text-base sm:text-lg leading-relaxed mb-6 font-['DM_Sans']">
+          Direct distributor prices on Daikin, LG, Panasonic, and Mitsubishi inverter split & cassette systems with genuine factory warranty across Sri Lanka.
+        </p>
+
+        <!-- Room Size Helper Interactive Tabs (Client-Side Filter) -->
+        <div class="bg-white p-4 rounded-2xl border border-[#DCE7F2] shadow-sm max-w-2xl">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold font-['Plus_Jakarta_Sans'] text-[#0F2038] uppercase tracking-wider">
+              Room Size Helper: Select your room dimensions
+            </span>
+            <span class="text-xs text-[#0284C7] font-medium" id="room-helper-hint">Showing all capacities</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-medium">
+            <button 
+              type="button" 
+              onclick="filterByRoomSize('all', this)"
+              class="room-size-btn py-2 px-3 rounded-xl bg-[#0284C7] text-white text-center transition-all"
+            >
+              All Capacities
+            </button>
+            <button 
+              type="button" 
+              onclick="filterByRoomSize('9000', this)"
+              class="room-size-btn py-2 px-3 rounded-xl bg-[#F8FAFC] hover:bg-[#EDF4FA] text-[#0F2038] border border-[#DCE7F2] text-center transition-all"
+            >
+              <strong class="block">Small Room</strong>
+              <span class="text-[11px] text-[#536B88]">9,000 BTU</span>
+            </button>
+            <button 
+              type="button" 
+              onclick="filterByRoomSize('12000-18000', this)"
+              class="room-size-btn py-2 px-3 rounded-xl bg-[#F8FAFC] hover:bg-[#EDF4FA] text-[#0F2038] border border-[#DCE7F2] text-center transition-all"
+            >
+              <strong class="block">Master Bed</strong>
+              <span class="text-[11px] text-[#536B88]">12k - 18k BTU</span>
+            </button>
+            <button 
+              type="button" 
+              onclick="filterByRoomSize('24000+', this)"
+              class="room-size-btn py-2 px-3 rounded-xl bg-[#F8FAFC] hover:bg-[#EDF4FA] text-[#0F2038] border border-[#DCE7F2] text-center transition-all"
+            >
+              <strong class="block">Open Hall</strong>
+              <span class="text-[11px] text-[#536B88]">24,000+ BTU</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-Step Strip: Choose -> WhatsApp Quote -> Delivery -->
+  <section class="bg-white py-6 border-b border-[#DCE7F2]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#EDF4FA] text-[#0284C7] flex items-center justify-center font-bold font-['Plus_Jakarta_Sans'] flex-shrink-0">1</div>
+          <div>
+            <strong class="text-[#0F2038] block">Select Your Capacity</strong>
+            <span class="text-xs text-[#536B88]">Match BTU size to your room square footage</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#EDF4FA] text-[#0284C7] flex items-center justify-center font-bold font-['Plus_Jakarta_Sans'] flex-shrink-0">2</div>
+          <div>
+            <strong class="text-[#0F2038] block">Instant WhatsApp Quote</strong>
+            <span class="text-xs text-[#536B88]">Get discounted pricing with installation options</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-full bg-[#EDF4FA] text-[#0284C7] flex items-center justify-center font-bold font-['Plus_Jakarta_Sans'] flex-shrink-0">3</div>
+          <div>
+            <strong class="text-[#0F2038] block">Islandwide Safe Delivery</strong>
+            <span class="text-xs text-[#536B88]">Insured transit to Colombo and all provinces</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cooling Products Grid -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h2 class="text-2xl font-bold font-['Plus_Jakarta_Sans'] text-[#0F2038]">Available Air Conditioners</h2>
+        <p class="text-xs text-[#536B88] mt-1">
+          Showing <span id="cooling-visible-count" class="font-bold text-[#0F2038]"><%= products.length %></span> models in stock
+        </p>
+      </div>
+
+      <!-- Inverter Quick Toggle (Client-side) -->
+      <label class="flex items-center gap-2 text-xs font-medium text-[#0F2038] cursor-pointer select-none bg-white py-1.5 px-3 rounded-xl border border-[#DCE7F2] shadow-sm">
+        <input type="checkbox" id="cooling-inverter-only" onchange="toggleInverterOnly(this)" class="rounded text-[#0284C7] focus:ring-0">
+        <span>Inverter Models Only</span>
+      </label>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" id="cooling-grid">
+      <% products.forEach(prod => { %>
+        <div class="cooling-item-wrapper" data-btu="<%= (prod.specs && prod.specs.capacity_btu) ? prod.specs.capacity_btu : 0 %>" data-inverter="<%= (prod.specs && prod.specs.inverter) ? 'true' : 'false' %>">
+          <%- include('../partials/product-card', { product: prod, currentTheme: 'cooling' }) %>
+        </div>
+      <% }) %>
+    </div>
+
+    <div id="cooling-empty-state" class="hidden py-16 text-center bg-white rounded-2xl border border-[#DCE7F2] p-8 max-w-md mx-auto">
+      <h3 class="font-bold text-base text-[#0F2038] mb-2">No matching units in this BTU range</h3>
+      <p class="text-xs text-[#536B88] mb-6">Need a custom capacity or commercial VRF multi-split? Chat directly with an engineer.</p>
+      <a href="<%= waLink('Air Conditioner Inquiry', '') %>" target="_blank" rel="noopener noreferrer" class="btn-whatsapp text-xs font-semibold py-2.5 px-5 rounded-xl inline-flex items-center gap-2">
+        <%- include('../partials/icons', { name: 'whatsapp', className: 'w-4 h-4' }) %>
+        Ask on WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <script>
+    let currentBtuFilter = 'all';
+    let inverterOnly = false;
+
+    function filterByRoomSize(range, btn) {
+      currentBtuFilter = range;
+      document.querySelectorAll('.room-size-btn').forEach(b => {
+        b.className = 'room-size-btn py-2 px-3 rounded-xl bg-[#F8FAFC] hover:bg-[#EDF4FA] text-[#0F2038] border border-[#DCE7F2] text-center transition-all';
+      });
+      btn.className = 'room-size-btn py-2 px-3 rounded-xl bg-[#0284C7] text-white text-center transition-all shadow-sm';
+      applyCoolingFilters();
+    }
+
+    function toggleInverterOnly(checkbox) {
+      inverterOnly = checkbox.checked;
+      applyCoolingFilters();
+    }
+
+    function applyCoolingFilters() {
+      const items = document.querySelectorAll('.cooling-item-wrapper');
+      let visible = 0;
+
+      items.forEach(el => {
+        const btu = parseInt(el.getAttribute('data-btu') || '0', 10);
+        const isInverter = el.getAttribute('data-inverter') === 'true';
+
+        let matchesBtu = true;
+        if (currentBtuFilter === '9000') {
+          matchesBtu = btu <= 9000;
+        } else if (currentBtuFilter === '12000-18000') {
+          matchesBtu = btu >= 12000 && btu <= 18000;
+        } else if (currentBtuFilter === '24000+') {
+          matchesBtu = btu >= 24000;
+        }
+
+        let matchesInverter = true;
+        if (inverterOnly && !isInverter) {
+          matchesInverter = false;
+        }
+
+        if (matchesBtu && matchesInverter) {
+          el.style.display = '';
+          visible++;
+        } else {
+          el.style.display = 'none';
+        }
+      });
+
+      document.getElementById('cooling-visible-count').textContent = visible;
+      const emptyState = document.getElementById('cooling-empty-state');
+      if (visible === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+      }
+    }
+  </script>
+
+<% } else if (isNetworking) { %>
+  <!-- ==============================================================
+       THEME B: NETWORKING (Dark, Dense, Enterprise Datasheet + Compare Tray)
+       ============================================================== -->
+  
+  <!-- Technical Specification Header -->
+  <div class="bg-[#161B22] border-b border-[#30363D] py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 text-[11px] font-mono text-[#10B981] mb-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#10B981]"></span>
+            CARRIER & ENTERPRISE HARDWARE INVENTORY
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-bold font-['IBM_Plex_Sans'] text-[#F0F6FC] tracking-tight">
+            Wireless Access Points & Network Infrastructure
+          </h1>
+          <p class="text-xs font-mono text-[#8B949E] mt-1">
+            Wi-Fi 6 / 6E / 7 APs, Cloud Controller Managed, High-Density PoE Uplinks
+          </p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-mono text-[#8B949E]">
+            <strong class="text-[#F0F6FC]" id="net-count"><%= products.length %></strong> models verified in stock
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      
+      <!-- Enterprise Filter Sidebar (Brand, Standard, PoE) -->
+      <div class="lg:col-span-1 space-y-4">
+        <div class="bg-[#161B22] border border-[#30363D] rounded-[4px] p-4 text-xs font-mono">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-[#30363D]">
+            <span class="font-bold text-[#F0F6FC] uppercase">Datasheet Filters</span>
+            <button type="button" onclick="resetNetFilters()" class="text-[#10B981] hover:underline text-[11px]">Reset</button>
+          </div>
+
+          <!-- Wi-Fi Generation -->
+          <div class="mb-4">
+            <span class="text-[#8B949E] block mb-2 font-semibold">Wi-Fi Generation</span>
+            <div class="space-y-1.5 text-[#F0F6FC]">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" value="Wi-Fi 6" onchange="applyNetFilters()" class="net-wifi-filter rounded-[2px] bg-[#0D1117] border-[#30363D] text-[#10B981] focus:ring-0">
+                <span>Wi-Fi 6 (802.11ax)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" value="Wi-Fi 6E" onchange="applyNetFilters()" class="net-wifi-filter rounded-[2px] bg-[#0D1117] border-[#30363D] text-[#10B981] focus:ring-0">
+                <span>Wi-Fi 6E (6 GHz)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" value="Wi-Fi 7" onchange="applyNetFilters()" class="net-wifi-filter rounded-[2px] bg-[#0D1117] border-[#30363D] text-[#10B981] focus:ring-0">
+                <span>Wi-Fi 7 (320 MHz)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" value="Wi-Fi 5" onchange="applyNetFilters()" class="net-wifi-filter rounded-[2px] bg-[#0D1117] border-[#30363D] text-[#10B981] focus:ring-0">
+                <span>Wi-Fi 5 (802.11ac)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- PoE Standard -->
+          <div class="mb-4">
+            <span class="text-[#8B949E] block mb-2 font-semibold">Power Over Ethernet (PoE)</span>
+            <div class="space-y-1.5 text-[#F0F6FC]">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" value="802.3at" onchange="applyNetFilters()" class="net-poe-filter rounded-[2px] bg-[#0D1117] border-[#30363D] text-[#10B981] focus:ring-0">
+                <span>PoE+ (802.3at)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" value="802.3bt" onchange="applyNetFilters()" class="net-poe-filter rounded-[2px] bg-[#0D1117] border-[#30363D] text-[#10B981] focus:ring-0">
+                <span>PoE++ (802.3bt)</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" value="802.3af" onchange="applyNetFilters()" class="net-poe-filter rounded-[2px] bg-[#0D1117] border-[#30363D] text-[#10B981] focus:ring-0">
+                <span>Standard (802.3af)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Environment -->
+          <div>
+            <span class="text-[#8B949E] block mb-2 font-semibold">Deployment Environment</span>
+            <div class="space-y-1.5 text-[#F0F6FC]">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" value="Indoor" onchange="applyNetFilters()" class="net-env-filter rounded-[2px] bg-[#0D1117] border-[#30363D] text-[#10B981] focus:ring-0">
+                <span>Indoor Ceiling / Wall</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" value="Outdoor" onchange="applyNetFilters()" class="net-env-filter rounded-[2px] bg-[#0D1117] border-[#30363D] text-[#10B981] focus:ring-0">
+                <span>Outdoor Weatherproof IP67</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- B2B Procurement Box -->
+        <div class="bg-[#161B22] border border-[#30363D] rounded-[4px] p-4 text-xs font-mono">
+          <div class="text-[#10B981] font-bold mb-1">B2B Volume RFQ</div>
+          <p class="text-[#8B949E] mb-3 leading-relaxed">
+            Need bill of materials (BOM) quotations or tax invoices for multi-site deployment?
+          </p>
+          <a href="<%= waLink('B2B Enterprise RFQ', '') %>" target="_blank" rel="noopener noreferrer" class="bg-[#21262D] hover:bg-[#30363D] text-[#F0F6FC] w-full py-2 px-3 rounded-[3px] flex items-center justify-center gap-2 border border-[#30363D] transition-colors">
+            <span>Direct WhatsApp RFQ</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Dense Hardware Table Grid -->
+      <div class="lg:col-span-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4" id="net-grid">
+          <% products.forEach(prod => { %>
+            <div 
+              class="net-item-wrapper"
+              data-wifi="<%= (prod.specs && prod.specs.wifi_standard) || '' %>"
+              data-poe="<%= (prod.specs && prod.specs.poe) || '' %>"
+              data-env="<%= (prod.specs && prod.specs.environment) || 'Indoor' %>"
+              data-brand="<%= prod.brand %>"
+            >
+              <%- include('../partials/product-card', { product: prod, currentTheme: 'networking' }) %>
+            </div>
+          <% }) %>
+        </div>
+
+        <div id="net-empty-state" class="hidden bg-[#161B22] border border-[#30363D] rounded-[4px] p-12 text-center text-xs font-mono">
+          <p class="text-[#8B949E] mb-4">No access points match selected technical specifications.</p>
+          <button type="button" onclick="resetNetFilters()" class="text-[#10B981] underline">Clear all active filters</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Side-by-side Compare Bottom Tray (Docked when >= 1 item checked) -->
+  <div id="compare-tray" class="fixed bottom-0 left-0 right-0 z-50 bg-[#161B22] border-t-2 border-[#10B981] shadow-2xl transform translate-y-full transition-transform duration-300 font-mono text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#10B981]"></span>
+          <span class="font-bold text-[#F0F6FC]">Spec Comparison</span>
+          <span class="text-[#8B949E]">(<span id="compare-count">0</span>/3 selected)</span>
+        </div>
+        <div id="compare-pills" class="hidden sm:flex items-center gap-2"></div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <button type="button" onclick="openCompareModal()" class="bg-[#10B981] hover:bg-[#059669] text-[#042416] font-bold py-1.5 px-4 rounded-[3px] transition-colors">
+          Compare Specs Side-by-Side
+        </button>
+        <button type="button" onclick="clearCompare()" class="text-[#8B949E] hover:text-[#F0F6FC] text-xs">
+          Clear
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Side-by-side Modal -->
+  <div id="compare-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-[#161B22] border border-[#30363D] rounded-[4px] w-full max-w-4xl max-h-[90vh] overflow-y-auto p-6 font-mono text-xs">
+      <div class="flex items-center justify-between pb-4 border-b border-[#30363D] mb-6">
+        <div>
+          <h3 class="text-base font-bold text-[#F0F6FC]">Hardware Datasheet Comparison</h3>
+          <p class="text-[11px] text-[#8B949E]">Direct side-by-side technical evaluation</p>
+        </div>
+        <button type="button" onclick="closeCompareModal()" class="text-[#8B949E] hover:text-white p-2">✕</button>
+      </div>
+
+      <div class="overflow-x-auto" id="compare-table-container"></div>
+    </div>
+  </div>
+
+  <script>
+    // Client-side comparison logic (reading from already loaded cards)
+    let compareList = [];
+
+    function toggleCompare(id, name, brand, model, wifi, poe, throughput, env, price, checkbox) {
+      if (checkbox.checked) {
+        if (compareList.length >= 3) {
+          alert('You can compare up to 3 hardware models at a time.');
+          checkbox.checked = false;
+          return;
+        }
+        compareList.push({ id, name, brand, model, wifi, poe, throughput, env, price });
+      } else {
+        compareList = compareList.filter(item => item.id !== id);
+      }
+      renderCompareTray();
+    }
+
+    function renderCompareTray() {
+      const tray = document.getElementById('compare-tray');
+      const countEl = document.getElementById('compare-count');
+      const pills = document.getElementById('compare-pills');
+
+      countEl.textContent = compareList.length;
+
+      if (compareList.length > 0) {
+        tray.classList.remove('translate-y-full');
+        pills.innerHTML = compareList.map(item => `
+          <span class="bg-[#0D1117] border border-[#30363D] px-2 py-0.5 rounded-[2px] text-[#F0F6FC] text-[11px] flex items-center gap-1.5">
+            ${item.brand} ${item.model}
+          </span>
+        `).join('');
+      } else {
+        tray.classList.add('translate-y-full');
+      }
+    }
+
+    function clearCompare() {
+      compareList = [];
+      document.querySelectorAll('.compare-checkbox').forEach(cb => cb.checked = false);
+      renderCompareTray();
+    }
+
+    function openCompareModal() {
+      if (compareList.length === 0) return;
+      const modal = document.getElementById('compare-modal');
+      const tableBox = document.getElementById('compare-table-container');
+
+      tableBox.innerHTML = `
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-[#30363D] text-[#8B949E]">
+              <th class="py-2.5 px-3">Specification</th>
+              ${compareList.map(c => `<th class="py-2.5 px-3 text-[#F0F6FC] font-bold">${c.brand} ${c.model}</th>`).join('')}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#30363D]/60 text-[#F0F6FC]">
+            <tr>
+              <td class="py-2.5 px-3 text-[#8B949E]">Display Name</td>
+              ${compareList.map(c => `<td class="py-2.5 px-3">${c.name}</td>`).join('')}
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 text-[#8B949E]">Wi-Fi Standard</td>
+              ${compareList.map(c => `<td class="py-2.5 px-3 text-[#10B981] font-semibold">${c.wifi}</td>`).join('')}
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 text-[#8B949E]">PoE Requirement</td>
+              ${compareList.map(c => `<td class="py-2.5 px-3">${c.poe}</td>`).join('')}
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 text-[#8B949E]">Max Throughput</td>
+              ${compareList.map(c => `<td class="py-2.5 px-3">${c.throughput}</td>`).join('')}
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 text-[#8B949E]">Environment</td>
+              ${compareList.map(c => `<td class="py-2.5 px-3">${c.env}</td>`).join('')}
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 text-[#8B949E]">Distributor Price</td>
+              ${compareList.map(c => `<td class="py-2.5 px-3 font-bold text-[#10B981]">${c.price}</td>`).join('')}
+            </tr>
+          </tbody>
+        </table>
+      `;
+
+      modal.classList.remove('hidden');
+    }
+
+    function closeCompareModal() {
+      document.getElementById('compare-modal').classList.add('hidden');
+    }
+
+    // Client-side spec filters
+    function applyNetFilters() {
+      const selectedWifi = Array.from(document.querySelectorAll('.net-wifi-filter:checked')).map(cb => cb.value);
+      const selectedPoe = Array.from(document.querySelectorAll('.net-poe-filter:checked')).map(cb => cb.value);
+      const selectedEnv = Array.from(document.querySelectorAll('.net-env-filter:checked')).map(cb => cb.value);
+
+      const items = document.querySelectorAll('.net-item-wrapper');
+      let visible = 0;
+
+      items.forEach(el => {
+        const wifi = el.getAttribute('data-wifi') || '';
+        const poe = el.getAttribute('data-poe') || '';
+        const env = el.getAttribute('data-env') || '';
+
+        let matchWifi = selectedWifi.length === 0 || selectedWifi.includes(wifi);
+        let matchPoe = selectedPoe.length === 0 || selectedPoe.includes(poe);
+        let matchEnv = selectedEnv.length === 0 || selectedEnv.includes(env);
+
+        if (matchWifi && matchPoe && matchEnv) {
+          el.style.display = '';
+          visible++;
+        } else {
+          el.style.display = 'none';
+        }
+      });
+
+      document.getElementById('net-count').textContent = visible;
+      const empty = document.getElementById('net-empty-state');
+      if (visible === 0) {
+        empty.classList.remove('hidden');
+      } else {
+        empty.classList.add('hidden');
+      }
+    }
+
+    function resetNetFilters() {
+      document.querySelectorAll('.net-wifi-filter, .net-poe-filter, .net-env-filter').forEach(cb => cb.checked = false);
+      applyNetFilters();
+    }
+  </script>
+
+<% } else { %>
+  <!-- Neutral Catalog Overview -->
+  <div class="py-10 border-b border-[var(--theme-border)] bg-[var(--theme-bg-subtle)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <nav class="text-xs font-mono text-[var(--theme-text-muted)] mb-2 flex items-center gap-2">
+            <a href="/" class="hover:text-[var(--theme-text)]">Gateway</a>
+            <span>/</span>
+            <span class="text-[var(--theme-text)]">All Equipment</span>
+          </nav>
+          <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-[var(--theme-text)]">
+            <%= searchQuery ? `Search Results: "${searchQuery}"` : 'Complete Hardware Catalog' %>
+          </h1>
+          <p class="text-xs text-[var(--theme-text-muted)] mt-1">Direct distributor units across cooling and enterprise wireless infrastructure.</p>
+        </div>
+        <div class="text-xs font-mono text-[var(--theme-text-muted)]">
+          Total: <span class="text-[var(--theme-primary)] font-bold"><%= products.length %></span> units
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <% products.forEach(prod => { %>
+        <%- include('../partials/product-card', { product: prod, currentTheme: prod.category_slug === 'air-conditioners' ? 'cooling' : 'networking' }) %>
+      <% }) %>
+    </div>
+  </div>
+<% } %>

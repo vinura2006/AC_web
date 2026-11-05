@@ -1,0 +1,190 @@
+<%
+  const pricing = product.pricing;
+  const stock = product.stock;
+  const primaryImg = (product.images && product.images[0]) ? product.images[0].url : '/uploads/demo/default.svg';
+  const isCooling = currentTheme === 'cooling';
+%>
+
+<!-- Breadcrumb -->
+<div class="py-3 border-b border-[var(--theme-border)] bg-[var(--theme-bg-subtle)] text-xs font-mono text-[var(--theme-text-muted)]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2">
+    <a href="/" class="hover:text-[var(--theme-text)]">Gateway</a>
+    <span>/</span>
+    <a href="/category/<%= product.category_slug %>" class="hover:text-[var(--theme-text)]"><%= product.category_name %></a>
+    <span>/</span>
+    <span class="text-[var(--theme-text)] truncate max-w-xs sm:max-w-md"><%= product.name %></span>
+  </div>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+    
+    <!-- Left Column: Product Visuals -->
+    <div class="lg:col-span-6 space-y-4">
+      <div class="th-card overflow-hidden aspect-[4/3] relative flex items-center justify-center p-6 <%= isCooling ? 'bg-gradient-to-b from-[#F0F7FF] to-[#E2EEF9]' : 'bg-[#0D1117]' %>">
+        <img 
+          id="main-product-image"
+          src="<%= primaryImg %>" 
+          alt="<%= product.name %>" 
+          class="w-full h-full object-contain"
+        />
+        <% if (pricing.isOnOffer) { %>
+          <div class="absolute top-4 left-4 <%= isCooling ? 'bg-[#EA580C] text-white rounded-full' : 'bg-[#F59E0B] text-[#0D1117] font-mono rounded-[2px]' %> px-3 py-1 text-xs font-bold shadow-md">
+            Save <%= pricing.discountPercent %>%
+          </div>
+        <% } %>
+      </div>
+
+      <!-- Multiple Angles -->
+      <% if (product.images && product.images.length > 1) { %>
+        <div class="flex gap-3 overflow-x-auto pb-2">
+          <% product.images.forEach((img) => { %>
+            <button 
+              type="button"
+              onclick="document.getElementById('main-product-image').src = '<%= img.url %>'"
+              class="w-20 h-20 <%= isCooling ? 'rounded-xl' : 'rounded-[3px]' %> overflow-hidden border border-[var(--theme-border)] hover:border-[var(--theme-primary)] flex-shrink-0 transition-colors p-2 bg-[var(--theme-surface)]"
+            >
+              <img src="<%= img.thumb_url || img.url %>" alt="<%= img.alt_text %>" class="w-full h-full object-contain">
+            </button>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+
+    <!-- Right Column: Specs & Purchasing Box -->
+    <div class="lg:col-span-6 flex flex-col">
+      <div class="text-xs uppercase tracking-wider mb-2 <%= isCooling ? 'text-[#0284C7] font-semibold' : 'text-[#8B949E] font-mono' %>">
+        <%= product.brand %> • <%= product.model %>
+      </div>
+
+      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[var(--theme-text)] mb-4">
+        <%= product.name %>
+      </h1>
+
+      <!-- Pricing Box -->
+      <div class="p-6 th-card mb-6">
+        <div class="flex items-baseline gap-3 mb-2">
+          <span class="text-3xl sm:text-4xl font-bold <%= isCooling ? 'text-[#0F2038]' : 'text-[#10B981] font-mono' %>">
+            <%= formatPrice(pricing.currentPrice) %>
+          </span>
+          <% if (pricing.isOnOffer) { %>
+            <span class="text-base text-[var(--theme-text-muted)] line-through font-mono">
+              <%= formatPrice(pricing.originalPrice) %>
+            </span>
+            <span class="text-xs font-bold text-[#EA580C] uppercase">
+              Save <%= formatPrice(pricing.savings) %>
+            </span>
+          <% } %>
+        </div>
+
+        <div class="flex items-center gap-3 pt-2">
+          <span class="text-xs px-2.5 py-0.5 rounded-full <%= stock.inStock ? 'bg-[#ECFDF5] text-[#065F46] border border-[#A7F3D0]' : 'bg-[#FEF2F2] text-[#991B1B] border border-[#FECACA]' %>">
+            <%= stock.label %>
+          </span>
+          <% if (product.warranty_text) { %>
+            <span class="text-xs text-[var(--theme-text-muted)] flex items-center gap-1.5">
+              <%- include('../partials/icons', { name: 'shield', className: 'w-3.5 h-3.5 text-[var(--theme-primary)]' }) %>
+              <%= product.warranty_text %>
+            </span>
+          <% } %>
+        </div>
+      </div>
+
+      <p class="text-sm text-[var(--theme-text-muted)] leading-relaxed mb-6">
+        <%= product.short_description %>
+      </p>
+
+      <!-- Primary Action: WhatsApp Quotation -->
+      <div class="space-y-3 mb-8">
+        <a 
+          href="<%= waLink(product.name, formatPrice(pricing.currentPrice)) %>" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="btn-whatsapp w-full py-3.5 text-sm sm:text-base font-bold shadow-md flex items-center justify-center gap-2 rounded-xl"
+        >
+          <%- include('../partials/icons', { name: 'whatsapp', className: 'w-5 h-5' }) %>
+          <span>Inquire & Request Invoice on WhatsApp</span>
+        </a>
+        <a href="tel:<%= settings.phone %>" class="th-btn-secondary w-full py-2.5 text-xs font-semibold text-center block">
+          Call Showroom: <%= settings.phone %>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Specifications Table -->
+  <div class="mt-16 pt-10 border-t border-[var(--theme-border)]">
+    <h2 class="text-2xl font-bold tracking-tight text-[var(--theme-text)] mb-6">
+      <%= isCooling ? 'Climate & Technical Specifications' : 'Technical Datasheet' %>
+    </h2>
+    
+    <div class="th-card overflow-hidden">
+      <table class="w-full text-left text-xs sm:text-sm">
+        <tbody class="divide-y divide-[var(--theme-border)]">
+          <tr class="bg-[var(--theme-bg-subtle)]">
+            <th class="py-3 px-4 font-mono text-[var(--theme-text-muted)] w-1/3">Brand</th>
+            <td class="py-3 px-4 font-semibold text-[var(--theme-text)]"><%= product.brand %></td>
+          </tr>
+          <tr>
+            <th class="py-3 px-4 font-mono text-[var(--theme-text-muted)]">Model Number</th>
+            <td class="py-3 px-4 font-semibold text-[var(--theme-text)]"><%= product.model %></td>
+          </tr>
+          <% if (product.spec_fields && Array.isArray(product.spec_fields)) { %>
+            <% product.spec_fields.forEach((field, i) => { %>
+              <% if (product.specs && product.specs[field.key] !== undefined) { 
+                   let val = product.specs[field.key];
+                   if (typeof val === 'boolean') val = val ? 'Yes' : 'No';
+              %>
+                <tr class="<%= i % 2 === 0 ? 'bg-[var(--theme-bg-subtle)]/40' : '' %>">
+                  <th class="py-3 px-4 font-mono text-[var(--theme-text-muted)]"><%= field.label %></th>
+                  <td class="py-3 px-4 text-[var(--theme-text)] font-medium">
+                    <%= val %> <%= field.unit || '' %>
+                  </td>
+                </tr>
+              <% } %>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Overview description -->
+  <% if (product.description) { %>
+    <div class="mt-12">
+      <h2 class="text-xl font-bold text-[var(--theme-text)] mb-3">Product Overview</h2>
+      <div class="text-sm text-[var(--theme-text-muted)] leading-relaxed space-y-2">
+        <p><%= product.description %></p>
+      </div>
+    </div>
+  <% } %>
+
+  <!-- Related Units -->
+  <% if (related && related.length > 0) { %>
+    <div class="mt-16 pt-10 border-t border-[var(--theme-border)]">
+      <h2 class="text-2xl font-bold tracking-tight text-[var(--theme-text)] mb-6">Similar Equipment</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <% related.forEach(rel => { %>
+          <%- include('../partials/product-card', { product: rel, currentTheme }) %>
+        <% }) %>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<!-- Mobile Sticky Bottom WhatsApp Quote Bar -->
+<div class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--theme-surface)] border-t border-[var(--theme-border)] p-3 shadow-xl flex items-center justify-between gap-3">
+  <div>
+    <div class="text-[10px] text-[var(--theme-text-muted)]">Price</div>
+    <div class="text-base font-bold font-mono text-[var(--theme-text)]"><%= formatPrice(pricing.currentPrice) %></div>
+  </div>
+  <a 
+    href="<%= waLink(product.name, formatPrice(pricing.currentPrice)) %>" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    class="btn-whatsapp text-xs font-bold py-2.5 px-4 flex items-center justify-center gap-1.5 flex-1 rounded-lg"
+  >
+    <%- include('../partials/icons', { name: 'whatsapp', className: 'w-4 h-4' }) %>
+    <span>Chat on WhatsApp</span>
+  </a>
+</div>

@@ -1,0 +1,73 @@
+<footer class="bg-[var(--theme-surface)] border-t border-[var(--theme-border)] mt-20 pt-16 pb-12 transition-colors">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+    <!-- Brand Info -->
+    <div>
+      <div class="flex items-center gap-2 mb-4">
+        <span class="font-bold text-lg text-[var(--theme-text)]"><%= settings.business_name %></span>
+      </div>
+      <p class="text-sm text-[var(--theme-text-muted)] mb-4 leading-relaxed"><%= settings.tagline %></p>
+      <p class="text-xs text-[var(--theme-text-muted)] font-mono">Commercial & Residential Procurement • Sri Lanka</p>
+    </div>
+
+    <!-- Product Divisions -->
+    <div>
+      <h3 class="font-semibold text-[var(--theme-text)] text-xs uppercase tracking-wider mb-4">Hardware Divisions</h3>
+      <ul class="space-y-2.5 text-sm text-[var(--theme-text-muted)]">
+        <li>
+          <a href="/category/air-conditioners" class="hover:text-[var(--theme-text)] transition-colors flex items-center gap-2" onclick="localStorage.setItem('frostnet_preferred_theme', 'cooling')">
+            <%- include('./icons', { name: 'snowflake', className: 'w-3.5 h-3.5 text-[#0284C7]' }) %>
+            <span>Cooling (Air Conditioners)</span>
+          </a>
+        </li>
+        <li>
+          <a href="/category/access-points" class="hover:text-[var(--theme-text)] transition-colors flex items-center gap-2" onclick="localStorage.setItem('frostnet_preferred_theme', 'networking')">
+            <%- include('./icons', { name: 'wifi', className: 'w-3.5 h-3.5 text-[#10B981]' }) %>
+            <span>Networking (Access Points & Switches)</span>
+          </a>
+        </li>
+        <li>
+          <a href="/offers" class="hover:text-[var(--theme-text)] transition-colors flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[var(--theme-accent)]"></span>
+            <span>Weekly Special Offers</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Information -->
+    <div>
+      <h3 class="font-semibold text-[var(--theme-text)] text-xs uppercase tracking-wider mb-4">Company</h3>
+      <ul class="space-y-2.5 text-sm text-[var(--theme-text-muted)]">
+        <li><a href="/about" class="hover:text-[var(--theme-text)] transition-colors">About FrostNet</a></li>
+        <li><a href="/contact" class="hover:text-[var(--theme-text)] transition-colors">Showroom & Delivery</a></li>
+        <li><a href="/admin/login" class="hover:text-[var(--theme-text)] transition-colors text-xs opacity-60">Seller Portal</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Block -->
+    <div>
+      <h3 class="font-semibold text-[var(--theme-text)] text-xs uppercase tracking-wider mb-4">Inquiries & Quotes</h3>
+      <div class="space-y-2.5 text-sm text-[var(--theme-text-muted)]">
+        <p><%= settings.address %></p>
+        <p><a href="tel:<%= settings.phone %>" class="hover:text-[var(--theme-text)]"><%= settings.phone %></a></p>
+        <p class="text-xs"><%= settings.hours %></p>
+        <div class="pt-2">
+          <a 
+            href="<%= waLink('', '') %>" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="btn-whatsapp text-xs font-semibold py-2 px-3 w-full flex items-center justify-center gap-2 rounded-lg"
+          >
+            <%- include('./icons', { name: 'whatsapp', className: 'w-4 h-4' }) %>
+            <span>WhatsApp Fast Support</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-6 border-t border-[var(--theme-border)] flex flex-col sm:flex-row items-center justify-between text-xs text-[var(--theme-text-muted)] gap-4">
+    <p>© <%= new Date().getFullYear() %> <%= settings.business_name %>. All rights reserved.</p>
+    <p>Direct wholesale quotes via WhatsApp.</p>
+  </div>
+</footer>
