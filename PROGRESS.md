@@ -9,4 +9,13 @@
   - Built idempotent seed script `src/db/seed-categories.js` and demo seeder `src/db/seed-demo.js` with local SVG generation.
   - Built Cyber design system tokens, Tailwind components, responsive header, drawer, footer, floating WhatsApp button, and product-card.
   - Built full EJS views: Home (`/`), Catalog & category filter (`/products`, `/category/:slug`), Product detail (`/product/:slug`), Weekly offers (`/offers`), About (`/about`), Contact (`/contact`), Search suggest API (`/api/search-suggest`), and 404/500 error pages.
-  - Next step: Run `npm run migrate`, `npm run seed:categories`, and `npm run seed:demo` once PostgreSQL credentials are provided in `.env`, then finalize the Admin dashboard & management routes.
+- 2026-11-08: Redesign, AC category interactive filter, theme harmonization, admin integration & audit completed.
+  - Integrated real high-resolution equipment photos for AC split systems and enterprise access points.
+  - Built interactive Room Size Helper tabs (`All`, `9,000 BTU`, `12k - 18k BTU`, `24,000+ BTU`) with live inventory counter and Inverter filter on `/category/air-conditioners`.
+  - Added dedicated popular AC showcase on the homepage (`/`) for immediate discoverability and SEO.
+  - Built enterprise networking datasheet filter and 3-item compare dock with side-by-side comparison modal on `/category/access-points`.
+  - Harmonized dual-theme system: both categories now adapt dynamically to the user's OS preference (`prefers-color-scheme: dark` or `light`).
+  - Added authorized Seller / Admin portal link on the homepage and footer, guarded by strict rate limiting (5 attempts / 15 mins).
+  - Created automated test and audit suite `scripts/full-audit.js`: all 12 public and admin views render cleanly with zero errors. All 10 unit tests pass.
+  - Documented full system architecture and deployment roadmap in `docs/SYSTEM_STATUS.md`.
+  - Next step: Cloud database setup (PostgreSQL) and production deployment on Render.com Web Service.

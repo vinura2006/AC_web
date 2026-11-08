@@ -40,7 +40,12 @@
       <ul class="space-y-2.5 text-sm text-[var(--theme-text-muted)]">
         <li><a href="/about" class="hover:text-[var(--theme-text)] transition-colors">About FrostNet</a></li>
         <li><a href="/contact" class="hover:text-[var(--theme-text)] transition-colors">Showroom & Delivery</a></li>
-        <li><a href="/admin/login" class="hover:text-[var(--theme-text)] transition-colors text-xs opacity-60">Seller Portal</a></li>
+        <li>
+          <a href="/admin/login" class="inline-flex items-center gap-1.5 hover:text-[#0284C7] transition-colors text-xs font-mono text-[var(--theme-text-muted)]">
+            <%- include('./icons', { name: 'lock', className: 'w-3 h-3 text-[#0284C7]' }) %>
+            <span>Seller & Admin Portal</span>
+          </a>
+        </li>
       </ul>
     </div>
 

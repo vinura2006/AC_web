@@ -7,33 +7,57 @@
 
 @layer base {
   /* ========================================================
-     DEFAULT / NEUTRAL THEME (Category Gateway & Search)
+     1. NEUTRAL / DEFAULT (Category Gateway, Catalog & Informational)
      ======================================================== */
   :root,
-  [data-theme="neutral"] {
-    --theme-bg: #0F172A;
-    --theme-bg-subtle: #1E293B;
-    --theme-surface: #1E293B;
-    --theme-surface-hover: #334155;
-    --theme-border: #334155;
-    --theme-text: #F8FAFC;
-    --theme-text-muted: #94A3B8;
-    --theme-primary: #38BDF8;
-    --theme-primary-hover: #0EA5E9;
-    --theme-primary-fg: #0F172A;
+  [data-theme="neutral"],
+  .light,
+  .light [data-theme="neutral"] {
+    --theme-bg: #F8FAFC;
+    --theme-bg-subtle: #EDF2F7;
+    --theme-surface: #FFFFFF;
+    --theme-surface-hover: #F1F5F9;
+    --theme-border: #E2E8F0;
+    --theme-text: #0F172A;
+    --theme-text-muted: #64748B;
+    --theme-primary: #0284C7;
+    --theme-primary-hover: #0369A1;
+    --theme-primary-fg: #FFFFFF;
     --theme-accent: #F59E0B;
     --theme-font-heading: 'Plus Jakarta Sans', sans-serif;
     --theme-font-body: 'DM Sans', sans-serif;
     --theme-font-mono: 'IBM Plex Mono', monospace;
     --theme-radius-card: 16px;
     --theme-radius-btn: 10px;
-    --theme-shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.25);
+    --theme-shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.06);
+  }
+
+  .dark,
+  .dark [data-theme="neutral"] {
+    --theme-bg: #0B0F19;
+    --theme-bg-subtle: #111827;
+    --theme-surface: #151E2E;
+    --theme-surface-hover: #1E293B;
+    --theme-border: #1E293B;
+    --theme-text: #F8FAFC;
+    --theme-text-muted: #94A3B8;
+    --theme-primary: #38BDF8;
+    --theme-primary-hover: #0EA5E9;
+    --theme-primary-fg: #0B0F19;
+    --theme-accent: #F59E0B;
+    --theme-font-heading: 'Plus Jakarta Sans', sans-serif;
+    --theme-font-body: 'DM Sans', sans-serif;
+    --theme-font-mono: 'IBM Plex Mono', monospace;
+    --theme-radius-card: 16px;
+    --theme-radius-btn: 10px;
+    --theme-shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
   }
 
   /* ========================================================
-     THEME A - COOLING (Light, Friendly, HVAC Editorial)
+     2. COOLING DIVISION (Light & Dark System-Adaptive)
      ======================================================== */
-  [data-theme="cooling"] {
+  [data-theme="cooling"],
+  .light [data-theme="cooling"] {
     --theme-bg: #F8FAFC;
     --theme-bg-subtle: #EDF4FA;
     --theme-surface: #FFFFFF;
@@ -44,19 +68,60 @@
     --theme-primary: #0284C7;        /* Crisp Ocean Blue */
     --theme-primary-hover: #0369A1;
     --theme-primary-fg: #FFFFFF;
-    --theme-accent: #EA580C;         /* Warm Coral for high-contrast CTAs */
+    --theme-accent: #EA580C;
     --theme-font-heading: 'Plus Jakarta Sans', sans-serif;
     --theme-font-body: 'DM Sans', sans-serif;
-    --theme-font-mono: 'DM Sans', sans-serif; /* No mono in Cooling */
-    --theme-radius-card: 20px;
+    --theme-font-mono: 'DM Sans', sans-serif;
+    --theme-radius-card: 18px;
     --theme-radius-btn: 12px;
     --theme-shadow-card: 0 10px 30px -5px rgba(15, 32, 56, 0.06), 0 2px 6px -1px rgba(15, 32, 56, 0.03);
   }
 
+  .dark [data-theme="cooling"] {
+    --theme-bg: #0B111B;
+    --theme-bg-subtle: #111A29;
+    --theme-surface: #152236;
+    --theme-surface-hover: #1D2E49;
+    --theme-border: #223755;
+    --theme-text: #F1F5F9;
+    --theme-text-muted: #94A3B8;
+    --theme-primary: #38BDF8;
+    --theme-primary-hover: #0EA5E9;
+    --theme-primary-fg: #0B111B;
+    --theme-accent: #F97316;
+    --theme-font-heading: 'Plus Jakarta Sans', sans-serif;
+    --theme-font-body: 'DM Sans', sans-serif;
+    --theme-font-mono: 'DM Sans', sans-serif;
+    --theme-radius-card: 18px;
+    --theme-radius-btn: 12px;
+    --theme-shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+  }
+
   /* ========================================================
-     THEME B - NETWORKING (Dark, Dense, Enterprise Datasheet)
+     3. NETWORKING DIVISION (Light & Dark System-Adaptive)
      ======================================================== */
-  [data-theme="networking"] {
+  [data-theme="networking"],
+  .light [data-theme="networking"] {
+    --theme-bg: #F8FAFC;
+    --theme-bg-subtle: #EEF2F6;
+    --theme-surface: #FFFFFF;
+    --theme-surface-hover: #F1F5F9;
+    --theme-border: #CBD5E1;
+    --theme-text: #0F172A;
+    --theme-text-muted: #64748B;
+    --theme-primary: #059669;        /* Enterprise Signal Emerald */
+    --theme-primary-hover: #047857;
+    --theme-primary-fg: #FFFFFF;
+    --theme-accent: #D97706;
+    --theme-font-heading: 'IBM Plex Sans', sans-serif;
+    --theme-font-body: 'IBM Plex Sans', sans-serif;
+    --theme-font-mono: 'IBM Plex Mono', monospace;
+    --theme-radius-card: 8px;
+    --theme-radius-btn: 6px;
+    --theme-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .dark [data-theme="networking"] {
     --theme-bg: #0D1117;             /* Clean Graphite/Charcoal */
     --theme-bg-subtle: #161B22;
     --theme-surface: #161B22;
@@ -67,12 +132,12 @@
     --theme-primary: #10B981;        /* Enterprise Signal Emerald */
     --theme-primary-hover: #059669;
     --theme-primary-fg: #042416;
-    --theme-accent: #F59E0B;         /* Signal Amber */
+    --theme-accent: #F59E0B;
     --theme-font-heading: 'IBM Plex Sans', sans-serif;
     --theme-font-body: 'IBM Plex Sans', sans-serif;
     --theme-font-mono: 'IBM Plex Mono', monospace;
-    --theme-radius-card: 4px;        /* Sharp enterprise corners */
-    --theme-radius-btn: 4px;
+    --theme-radius-card: 8px;
+    --theme-radius-btn: 6px;
     --theme-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5);
   }
 

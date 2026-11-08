@@ -6,6 +6,17 @@
   <title><%= typeof title !== 'undefined' ? `${title} | ${settings.business_name}` : `${settings.business_name} | ${settings.tagline}` %></title>
   <meta name="description" content="<%= typeof description !== 'undefined' ? description : settings.tagline %>">
   
+  <!-- Early script to prevent theme flash: sync system dark/light immediately -->
+  <script>
+    (function() {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.add('light');
+      }
+    })();
+  </script>
+
   <!-- Compiled Styles -->
   <link rel="stylesheet" href="/css/output.css">
   <meta name="theme-color" content="#0F172A">
